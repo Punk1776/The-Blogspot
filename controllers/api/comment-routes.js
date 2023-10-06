@@ -1,30 +1,27 @@
+// Import the required modules and models
 const router = require('express').Router();
-const {
-    User,
-    Post,
-    Comment
-} = require('../../models');
+const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-
-//Get all comments
-router.get("/", (req, res) => {
+// Route to get all comments
+router.get('/', (req, res) => {
     Comment.findAll()
-        .then((dbCommentData) => res.json(dbCommentData))
-        .catch((err) => {
+        .then(dbCommentData => res.json(dbCommentData))
+        .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
 
-//Create a comment
+// Route to create a new comment
 router.post('/', withAuth, (req, res) => {
     if (req.session) {
+        // Create a new comment in the database with the provided comment_text, post_id, and user_id
         Comment.create({
-                comment_text: req.body.comment_text,
-                post_id: req.body.post_id,
-                user_id: req.session.user_id
-            })
+            comment_text: req.body.comment_text,
+            post_id: req.body.post_id,
+            user_id: req.session.user_id
+        })
             .then(dbCommentData => res.json(dbCommentData))
             .catch(err => {
                 console.log(err);
@@ -32,6 +29,5 @@ router.post('/', withAuth, (req, res) => {
             });
     }
 });
-
 
 module.exports = router;
