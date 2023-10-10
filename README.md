@@ -43,6 +43,7 @@ Make sure to replace your-secret-key with your actual session secret and 3001 wi
 
 Start the application:
 
+[Untitled_ Oct 10 2023 4_22 PM.webm](https://github.com/Punk1776/the-blogspot/assets/135387049/4183a448-db52-4d4c-a933-974cb7146ec2)
 
 
 npm start
